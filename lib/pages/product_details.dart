@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:ecomm_app/main.dart';
 
 class ProductDetails extends StatefulWidget {
   final product_detail_name;
@@ -24,7 +25,17 @@ class _ProductDetailsState extends State<ProductDetails> {
       appBar: new AppBar(
         elevation: 0.1,
         backgroundColor: Colors.red,
-        title: Text('Products'),
+        title: InkWell(
+          onTap: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => new HomePage(),
+              ),
+            );
+          },
+          child: Text('ShopApp'),
+        ),
         actions: <Widget>[
           new IconButton(
             icon: Icon(
@@ -103,7 +114,9 @@ class _ProductDetailsState extends State<ProductDetails> {
                           content: new Text("Choose the size"),
                           actions: <Widget>[
                             new MaterialButton(
-                              onPressed: () {},
+                              onPressed: () {
+                                Navigator.of(context).pop(context);
+                              },
                               child: new Text("close"),
                             ),
                           ],
@@ -125,7 +138,25 @@ class _ProductDetailsState extends State<ProductDetails> {
               // The color button of the products page
               Expanded(
                 child: MaterialButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    showDialog(
+                      context: context,
+                      builder: (context) {
+                        return new AlertDialog(
+                          title: new Text("Color"),
+                          content: new Text("Choose your preferred color"),
+                          actions: <Widget>[
+                            new MaterialButton(
+                              onPressed: () {
+                                Navigator.of(context).pop(context);
+                              },
+                              child: new Text("close"),
+                            ),
+                          ],
+                        );
+                      },
+                    );
+                  },
                   color: Colors.white,
                   textColor: Colors.grey,
                   elevation: 0.2,
@@ -140,7 +171,25 @@ class _ProductDetailsState extends State<ProductDetails> {
               // The quantity button of the products page
               Expanded(
                 child: MaterialButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    showDialog(
+                      context: context,
+                      builder: (context) {
+                        return new AlertDialog(
+                          title: new Text("Qty"),
+                          content: new Text("Choose the quantity"),
+                          actions: <Widget>[
+                            new MaterialButton(
+                              onPressed: () {
+                                Navigator.of(context).pop(context);
+                              },
+                              child: new Text("close"),
+                            ),
+                          ],
+                        );
+                      },
+                    );
+                  },
                   color: Colors.white,
                   textColor: Colors.grey,
                   elevation: 0.2,
@@ -183,6 +232,69 @@ class _ProductDetailsState extends State<ProductDetails> {
                   color: Colors.red,
                 ),
                 onPressed: () {},
+              ),
+            ],
+          ),
+
+          Divider(),
+
+          new ListTile(
+            title: Row(
+              children: <Widget>[
+                Padding(
+                    padding: const EdgeInsets.fromLTRB(0.0, 5.0, 5.0, 12.0),
+                    child: new Text("Product details")),
+              ],
+            ),
+            subtitle: new Text(
+                "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum."),
+          ),
+
+          Divider(),
+          new Row(
+            children: <Widget>[
+              Padding(
+                padding: const EdgeInsets.fromLTRB(12.0, 5.0, 5.0, 5.0),
+                child: new Text(
+                  "Product name",
+                  style: TextStyle(color: Colors.grey),
+                ),
+              ),
+              Padding(
+                padding: EdgeInsets.all(5.0),
+                child: new Text(widget.product_detail_name),
+              ),
+            ],
+          ),
+
+          new Row(
+            children: <Widget>[
+              Padding(
+                padding: const EdgeInsets.fromLTRB(12.0, 5.0, 5.0, 5.0),
+                child: new Text(
+                  "Product brand",
+                  style: TextStyle(color: Colors.grey),
+                ),
+              ),
+              Padding(
+                padding: EdgeInsets.all(5.0),
+                child: new Text("Brand X"),
+              ),
+            ],
+          ),
+
+          new Row(
+            children: <Widget>[
+              Padding(
+                padding: const EdgeInsets.fromLTRB(12.0, 5.0, 5.0, 5.0),
+                child: new Text(
+                  "Product condition",
+                  style: TextStyle(color: Colors.grey),
+                ),
+              ),
+              Padding(
+                padding: EdgeInsets.all(5.0),
+                child: new Text("NEW"),
               ),
             ],
           ),
