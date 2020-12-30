@@ -107,8 +107,8 @@ class _HomePageState extends State<HomePage> {
             InkWell(
               onTap: () {},
               child: ListTile(
-                title: Text('Categories'),
-                leading: Icon(Icons.dashboard, color: Colors.red),
+                title: Text('Shopping Cart'),
+                leading: Icon(Icons.shopping_cart, color: Colors.red),
               ),
             ),
 
@@ -126,7 +126,7 @@ class _HomePageState extends State<HomePage> {
               onTap: () {},
               child: ListTile(
                 title: Text('Settings'),
-                leading: Icon(Icons.settings, color: Colors.blue),
+                leading: Icon(Icons.settings),
               ),
             ),
 
@@ -134,7 +134,7 @@ class _HomePageState extends State<HomePage> {
               onTap: () {},
               child: ListTile(
                 title: Text('About'),
-                leading: Icon(Icons.help, color: Colors.blue),
+                leading: Icon(Icons.help),
               ),
             ),
           ],
@@ -157,12 +157,12 @@ class _HomePageState extends State<HomePage> {
           // Recent Products Text and Padding Widget inluding product images
           new Padding(
             padding: const EdgeInsets.all(20.0),
-            child: new Text('Recent product'),
+            child: new Text('Recent products'),
           ),
 
           //Grid view of products recently viewed
           Container(
-            height: 320.0,
+            height: 500.0,
             child: Products(),
           ),
         ],
