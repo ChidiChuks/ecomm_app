@@ -76,12 +76,12 @@ class _LoginState extends State<Login> {
             .setData({
           "id": firebaseUser.uid,
           "username": firebaseUser.displayName,
-          // "profilePicture": firebaseUser.photoURL,
+          "profilePicture": firebaseUser.photoUrl,
         });
 
         await preferences.setString("id", firebaseUser.uid);
         await preferences.setString("username", firebaseUser.displayName);
-        // await preferences.setString("profilePicture", firebaseUser.photoURL);
+        await preferences.setString("profilePicture", firebaseUser.photoUrl);
       } else {
         await preferences.setString("id", documents[0]['id']);
         await preferences.setString("username", documents[0]['username']);
@@ -116,6 +116,18 @@ class _LoginState extends State<Login> {
       ),
       body: Stack(
         children: <Widget>[
+          Center(
+            child: FlatButton(
+              color: Colors.red.shade900,
+              onPressed: () {
+                handleSignIn();
+              },
+              child: Text(
+                "Sign in / Sign up with Google",
+                style: TextStyle(color: Colors.white),
+              ),
+            ),
+          ),
           Visibility(
             visible: loading ?? true,
             child: Center(
@@ -130,21 +142,21 @@ class _LoginState extends State<Login> {
           ),
         ],
       ),
-      bottomNavigationBar: Container(
-        child: Padding(
-          padding: const EdgeInsets.fromLTRB(12.0, 12.0, 8.0, 8.0),
-          child: FlatButton(
-            color: Colors.red,
-            onPressed: () {
-              handleSignIn();
-            },
-            child: Text(
-              "Sign in / Sign up with Google",
-              style: TextStyle(color: Colors.white),
-            ),
-          ),
-        ),
-      ),
+      // bottomNavigationBar: Container(
+      //   child: Padding(
+      //     padding: const EdgeInsets.fromLTRB(12.0, 12.0, 8.0, 8.0),
+      //     child: FlatButton(
+      //       color: Colors.red,
+      //       onPressed: () {
+      //         handleSignIn();
+      //       },
+      //       child: Text(
+      //         "Sign in / Sign up with Google",
+      //         style: TextStyle(color: Colors.white),
+      //       ),
+      //     ),
+      //   ),
+      // ),
     );
   }
 }
