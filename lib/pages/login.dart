@@ -81,12 +81,11 @@ class _LoginState extends State<Login> {
 
         await preferences.setString("id", firebaseUser.uid);
         await preferences.setString("username", firebaseUser.displayName);
-        await preferences.setString("profilePicture", firebaseUser.photoUrl);
+        await preferences.setString("photoUrl", firebaseUser.displayName);
       } else {
         await preferences.setString("id", documents[0]['id']);
         await preferences.setString("username", documents[0]['username']);
-        await preferences.setString(
-            "profilePicture", documents[0]["profilePicture"]);
+        await preferences.setString("photoUrl", documents[0]["photoUrl"]);
       }
 
       Fluttertoast.showToast(msg: "Successfully logged in");
@@ -105,28 +104,13 @@ class _LoginState extends State<Login> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Colors.white,
-        centerTitle: true,
-        title: new Text(
-          "Login",
-          style: TextStyle(color: Colors.red.shade900),
-        ),
-        elevation: 0.1,
-      ),
       body: Stack(
         children: <Widget>[
-          Center(
-            child: FlatButton(
-              color: Colors.red.shade900,
-              onPressed: () {
-                handleSignIn();
-              },
-              child: Text(
-                "Sign in / Sign up with Google",
-                style: TextStyle(color: Colors.white),
-              ),
-            ),
+          Image.asset(
+            'images/bg/background.jpg',
+            fit: BoxFit.cover,
+            width: double.infinity,
+            height: double.infinity,
           ),
           Visibility(
             visible: loading ?? true,
@@ -142,21 +126,21 @@ class _LoginState extends State<Login> {
           ),
         ],
       ),
-      // bottomNavigationBar: Container(
-      //   child: Padding(
-      //     padding: const EdgeInsets.fromLTRB(12.0, 12.0, 8.0, 8.0),
-      //     child: FlatButton(
-      //       color: Colors.red,
-      //       onPressed: () {
-      //         handleSignIn();
-      //       },
-      //       child: Text(
-      //         "Sign in / Sign up with Google",
-      //         style: TextStyle(color: Colors.white),
-      //       ),
-      //     ),
-      //   ),
-      // ),
+      bottomNavigationBar: Container(
+        child: Padding(
+          padding: const EdgeInsets.fromLTRB(12.0, 8.0, 12.0, 8.0),
+          child: FlatButton(
+            color: Colors.red,
+            onPressed: () {
+              handleSignIn();
+            },
+            child: Text(
+              "Sign in / Sign up with Google",
+              style: TextStyle(color: Colors.white),
+            ),
+          ),
+        ),
+      ),
     );
   }
 }
