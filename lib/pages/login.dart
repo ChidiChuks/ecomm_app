@@ -16,6 +16,11 @@ class Login extends StatefulWidget {
 class _LoginState extends State<Login> {
   final GoogleSignIn googleSignIn = new GoogleSignIn();
   final FirebaseAuth firebaseAuth = FirebaseAuth.instance;
+  final _formKey = GlobalKey<FormState>();
+
+  TextEditingController _emailTextController = TextEditingController();
+  TextEditingController _passwordTextController = TextEditingController();
+
   SharedPreferences preferences;
   bool loading = false;
   bool isLoggedIn = false;
@@ -106,11 +111,50 @@ class _LoginState extends State<Login> {
     return Scaffold(
       body: Stack(
         children: <Widget>[
+          // TODO:: Logo to show on the background image
+          // Container(
+          //   alignment: Alignment.topCenter,
+          //   child: Text(
+          //     "Ecomm_App",
+          //     style: TextStyle(
+          //       fontSize: 25,
+          //       color: Colors.white,
+          //       fontWeight: FontWeight.bold,
+          //       // decoration: TextDecoration.underline,
+          //     ),
+          //   ),
+          // ),
           Image.asset(
             'images/bg/background.jpg',
             fit: BoxFit.cover,
             width: double.infinity,
             height: double.infinity,
+          ),
+          // Overlay on background image
+          Container(
+            color: Colors.red.withOpacity(0.2),
+            width: double.infinity,
+            height: double.infinity,
+          ),
+          // Login Form
+          Container(
+            alignment: Alignment.center,
+            child: Center(
+              child: Form(
+                key: _formKey,
+                child: Column(
+                  children: [
+                    TextFormField(
+                      decoration: InputDecoration(
+                        hintText: "Email ",
+                        icon: Icon(Icons.email),
+                        border: OutlineInputBorder(),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
           ),
           Visibility(
             visible: loading ?? true,
@@ -144,3 +188,17 @@ class _LoginState extends State<Login> {
     );
   }
 }
+
+// keyboardType: TextInputType.emailAddress,
+//                       controller: _emailTextController,
+//                       validator: (value) {
+//   if (value.isEmpty) {
+//     Pattern pattern =
+//         r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$';
+//     RegExp regex = new RegExp(pattern);
+//     if (!regex.hasMatch(value))
+//       return 'Please make sure your email address is valid';
+//     else
+//       return null;
+//   }
+// },
