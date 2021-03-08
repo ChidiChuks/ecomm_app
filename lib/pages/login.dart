@@ -132,26 +132,156 @@ class _LoginState extends State<Login> {
           ),
           // Overlay on background image
           Container(
-            color: Colors.red.withOpacity(0.2),
+            color: Colors.black.withOpacity(0.4),
             width: double.infinity,
             height: double.infinity,
           ),
+          // Logo image
+          Padding(
+            padding: const EdgeInsets.all(70.0),
+            child: Container(
+              alignment: Alignment.topCenter,
+              // width: double.infinity,
+              // height: double.infinity / 4,
+              child: Text(
+                "ShopApp",
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 36.0,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            ),
+          ),
           // Login Form
-          Container(
-            alignment: Alignment.center,
-            child: Center(
-              child: Form(
-                key: _formKey,
-                child: Column(
-                  children: [
-                    TextFormField(
-                      decoration: InputDecoration(
-                        hintText: "Email ",
-                        icon: Icon(Icons.email),
-                        border: OutlineInputBorder(),
+          Padding(
+            padding: const EdgeInsets.only(top: 270.0),
+            child: Container(
+              alignment: Alignment.center,
+              child: Center(
+                child: Form(
+                  key: _formKey,
+                  child: Column(
+                    children: [
+                      // Email Input Tab
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Material(
+                          borderRadius: BorderRadius.circular(20.0),
+                          color: Colors.white.withOpacity(0.8),
+                          elevation: 0.0,
+                          child: Padding(
+                            padding: const EdgeInsets.only(left: 12.0),
+                            child: TextFormField(
+                              controller: _emailTextController,
+                              decoration: InputDecoration(
+                                hintText: "Email ",
+                                icon: Icon(Icons.email),
+                                // border: OutlineInputBorder(),
+                              ),
+                              validator: (value) {
+                                if (value.isEmpty) {
+                                  Pattern pattern =
+                                      r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$';
+                                  RegExp regex = new RegExp(pattern);
+                                  if (!regex.hasMatch(value))
+                                    return 'Please make sure your email address is valid';
+                                  else
+                                    return null;
+                                }
+                              },
+                            ),
+                          ),
+                        ),
                       ),
-                    ),
-                  ],
+                      // Password Input Tab
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Material(
+                          borderRadius: BorderRadius.circular(20.0),
+                          color: Colors.white.withOpacity(0.8),
+                          elevation: 0.0,
+                          child: Padding(
+                            padding: const EdgeInsets.only(left: 12.0),
+                            child: TextFormField(
+                              controller: _passwordTextController,
+                              decoration: InputDecoration(
+                                hintText: "Password ",
+                                icon: Icon(Icons.lock_outline),
+                                // border: OutlineInputBorder(),
+                              ),
+                              validator: (value) {
+                                if (value.isEmpty) {
+                                  return "The password field cannot be empty";
+                                } else if (value.length < 6) {
+                                  return "the password has to be at least 6 characters long";
+                                }
+                                return null;
+                              },
+                            ),
+                          ),
+                        ),
+                      ),
+                      // Login Button
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Material(
+                          borderRadius: BorderRadius.circular(20.0),
+                          color: Colors.orange[800],
+                          elevation: 0.0,
+                          child: MaterialButton(
+                            onPressed: () {},
+                            minWidth: MediaQuery.of(context).size.width,
+                            child: Text(
+                              "Login",
+                              textAlign: TextAlign.center,
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontWeight: FontWeight.bold,
+                                fontSize: 22.0,
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+                      //Text Divider
+                      Divider(
+                        color: Colors.white,
+                      ),
+                      Text(
+                        "Other login option",
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontWeight: FontWeight.w400,
+                          fontSize: 15.0,
+                        ),
+                      ),
+                      //
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Material(
+                          borderRadius: BorderRadius.circular(20.0),
+                          color: Colors.green[800],
+                          elevation: 0.0,
+                          child: MaterialButton(
+                            onPressed: () {
+                              handleSignIn();
+                            },
+                            minWidth: MediaQuery.of(context).size.width,
+                            child: Text(
+                              "Google",
+                              textAlign: TextAlign.center,
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontWeight: FontWeight.bold,
+                                fontSize: 22.0,
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
               ),
             ),
@@ -170,21 +300,21 @@ class _LoginState extends State<Login> {
           ),
         ],
       ),
-      bottomNavigationBar: Container(
-        child: Padding(
-          padding: const EdgeInsets.fromLTRB(12.0, 8.0, 12.0, 8.0),
-          child: FlatButton(
-            color: Colors.red,
-            onPressed: () {
-              handleSignIn();
-            },
-            child: Text(
-              "Sign in / Sign up with Google",
-              style: TextStyle(color: Colors.white),
-            ),
-          ),
-        ),
-      ),
+      // bottomNavigationBar: Container(
+      //   child: Padding(
+      //     padding: const EdgeInsets.fromLTRB(12.0, 8.0, 12.0, 8.0),
+      //     child: FlatButton(
+      //       color: Colors.red,
+      //       onPressed: () {
+      //         handleSignIn();
+      //       },
+      //       child: Text(
+      //         "Sign in / Sign up with Google",
+      //         style: TextStyle(color: Colors.white),
+      //       ),
+      //     ),
+      //   ),
+      // ),
     );
   }
 }
